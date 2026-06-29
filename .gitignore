@@ -1,0 +1,19 @@
+# Виртуальное окружение
+venv/
+env/
+.venv/
+
+# Файлы с секретами
+.env
+*.env
+
+# Кэш Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Логи и временные файлы
+*.log
+*.tmp
+.DS_Store
