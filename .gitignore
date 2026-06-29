@@ -2,6 +2,7 @@
 venv/
 env/
 .venv/
+.env/
 
 # Файлы с секретами
 .env
