@@ -1,28 +1,22 @@
-from app.db.db import engine, SessionLocal
-from app.db import models
-from app.db.crud import create_category, create_book
+from db.db import engine, Base, SessionLocal
+from db.crud import create_category, create_book
+from db.models import Category, Book
+
+Base.metadata.create_all(bind=engine)
 
 def init_db():
-    # Создаём таблицы (если их нет)
-    models.Base.metadata.create_all(bind=engine)
-
     db = SessionLocal()
 
-    # Добавляем категории
-    cat1 = create_category(db, "Фантастика")
-    cat2 = create_category(db, "Детективы")
+    cat1 = create_category(db, "Программирование")
+    cat2 = create_category(db, "Художественная литература")
 
-    # Книги для категории "Фантастика"
-    create_book(db, "Дюна", "Фрэнк Герберт", 500.0, cat1.id, "https://example.com/dune")
-    create_book(db, "1984", "Джордж Оруэлл", 450.0, cat1.id, "https://example.com/1984")
-    create_book(db, "Властелин колец", "Дж. Р. Р. Толкин", 700.0, cat1.id, "https://example.com/lotr")
-
-    # Книги для категории "Детективы"
-    create_book(db, "Убийство в Восточном экспрессе", "Агата Кристи", 400.0, cat2.id, "https://example.com/murder")
-    create_book(db, "Тень ветра", "Карлос Руис Сафон", 550.0, cat2.id, "https://example.com/shadow")
+    create_book(db, "Python для начинающих", "Основы языка", 1200.0, cat1.id)
+    create_book(db, "SQLAlchemy в деталях", "Продвинутый уровень", 1500.0, cat1.id)
+    create_book(db, "Мастер и Маргарита", "Классика", 800.0, cat2.id)
+    create_book(db, "1984", "Антиутопия", 750.0, cat2.id)
 
     db.close()
-    print("База данных инициализирована тестовыми данными.")
+    print("База данных успешно инициализирована!")
 
 if __name__ == "__main__":
     init_db()
